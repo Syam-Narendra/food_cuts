@@ -3,6 +3,7 @@ import time
 from playwright.sync_api import sync_playwright
 from playwright_stealth import stealth
 from cookies import cookies
+from getReelsInfo import main as extractReelsInfo
 
 
 def open_instagram():
@@ -31,17 +32,9 @@ def open_instagram():
             new_url = page.url
             if new_url != last_url:
                 print("New Reel URL:", new_url)
-                with open(jsonFilePath, "r") as file:
-                    try:
-                        oldFileData = json.load(file)
-                        data = oldFileData
-                    except:
-                        data = []
-                with open(jsonFilePath, "w") as file:
-                    newUrl = {"link": new_url}
-                    data.append(newUrl)
-                    json.dump(data, file, indent=4)
+                reelsInfo = extractReelsInfo(new_url)
+                newLine = json.dumps({"url": reelsInfo})
+                with open("reelsLinksData.json", "a") as file:
+                    file.write(jsonLine+ "\n")
                 last_url = new_url
-
-
 open_instagram()
