@@ -1,10 +1,11 @@
 [project]
 name = "food-cuts"
 version = "0.1.0"
-description = "Add your description here"
+description = "Scrapper to get instagram reels links"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "asyncio>=3.4.3",
-    "crawlee[all]>=0.6.5",
+    "playwright-stealth>=1.0.6",
+    "setuptools>=77.0.3",
 ]
